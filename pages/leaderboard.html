@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leaderboard - EventQuest</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="app-container">
+        <div class="header">
+            <a href="profile.html" style="color: white; text-decoration: none; font-size: 1.5rem;">←</a>
+            <div class="header-title">Top Players</div>
+            <div></div>
+        </div>
+        
+        <div class="leaderboard-wrapper">
+            <div class="leader-item">
+                <div class="rank gold">1</div>
+                <div class="player-info">
+                    <div class="player-name">Mark</div>
+                    <div class="player-xp">100 XP</div>
+                </div>
+                <div>🥇</div>
+            </div>
+            
+            <div class="leader-item">
+                <div class="rank silver">2</div>
+                <div class="player-info">
+                    <div class="player-name">Amy</div>
+                    <div class="player-xp">90 XP</div>
+                </div>
+                <div>🥈</div>
+            </div>
+            
+            <div class="leader-item">
+                <div class="rank bronze">3</div>
+                <div class="player-info">
+                    <div class="player-name">Joe</div>
+                    <div class="player-xp">80 XP</div>
+                </div>
+                <div>🥉</div>
+            </div>
+
+            <div class="leader-item">
+                <div class="rank">4</div>
+                <div class="player-info">
+                    <div class="player-name">Sarah</div>
+                    <div class="player-xp">75 XP</div>
+                </div>
+            </div>
+
+            <div class="leader-item">
+                <div class="rank">5</div>
+                <div class="player-info">
+                    <div class="player-name">Mike</div>
+                    <div class="player-xp">70 XP</div>
+                </div>
+            </div>
+            
+            <div class="leader-item current-user">
+                <div class="rank">13</div>
+                <div class="player-info">
+                    <div class="player-name">You</div>
+                    <div class="player-xp">50 XP</div>
+                </div>
+            </div>
+        </div>
+        
+        <nav class="nav">
+            <a href="home.html" class="nav-item" data-page="home">
+                <img src="../assets/icons/home.svg" class="nav-icon" alt="Home">
+                <div class="nav-label">Home</div>
+            </a>
+            <a href="search.html" class="nav-item" data-page="search">
+                <img src="../assets/icons/search.svg" class="nav-icon" alt="Search">
+                <div class="nav-label">Search</div>
+            </a>
+            <a href="quests.html" class="nav-item" data-page="quests">
+                <img src="../assets/icons/question.svg" class="nav-icon" alt="Quests">
+                <div class="nav-label">Quests</div>
+            </a>
+            <a href="chat.html" class="nav-item" data-page="chat">
+                <img src="../assets/icons/chat.svg" class="nav-icon" alt="Chat">
+                <div class="nav-label">Chat</div>
+            </a>
+            <a href="profile.html" class="nav-item active" data-page="profile">
+                <img src="../assets/icons/profile.svg" class="nav-icon" alt="Profile">
+                <div class="nav-label">Profile</div>
+            </a>
+        </nav>
+    </div>
+
+    <script src="../js/app.js"></script>
+    <script>
+        initPage('profile');
+    </script>
+</body>
+</html>

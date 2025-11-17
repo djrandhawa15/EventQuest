@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Assistant - EventQuest</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="app-container">
+        <div class="header">
+            <div class="header-title">AI Assistant</div>
+        </div>
+        
+        <div class="chat-wrapper">
+            <div class="messages" id="messages">
+                <div class="message">
+                    <div class="msg-avatar">🤖</div>
+                    <div class="msg-bubble">
+                        Hi! I'm your EventQuest AI assistant. How can I help you with your quests today?
+                    </div>
+                </div>
+                
+                <div class="message user">
+                    <div class="msg-avatar">👤</div>
+                    <div class="msg-bubble">
+                        Where is the next checkpoint?
+                    </div>
+                </div>
+                
+                <div class="message">
+                    <div class="msg-avatar">🤖</div>
+                    <div class="msg-bubble">
+                        Your next checkpoint is at Park Place, approximately 0.5 miles north of your current location. Would you like me to show you on the map?
+                    </div>
+                </div>
+            </div>
+            
+            <div class="chat-input-area">
+                <input type="text" class="chat-input" placeholder="Ask for help..." id="chatInput">
+                <button class="send-btn" onclick="sendMessage()">➤</button>
+            </div>
+        </div>
+        
+        <nav class="nav">
+            <a href="home.html" class="nav-item" data-page="home">
+                <img src="../assets/icons/home.svg" class="nav-icon" alt="Home">
+                <div class="nav-label">Home</div>
+            </a>
+            <a href="search.html" class="nav-item" data-page="search">
+                <img src="../assets/icons/search.svg" class="nav-icon" alt="Search">
+                <div class="nav-label">Search</div>
+            </a>
+            <a href="quests.html" class="nav-item" data-page="quests">
+                <img src="../assets/icons/question.svg" class="nav-icon" alt="Quests">
+                <div class="nav-label">Quests</div>
+            </a>
+            <a href="chat.html" class="nav-item active" data-page="chat">
+                <img src="../assets/icons/chat.svg" class="nav-icon" alt="Chat">
+                <div class="nav-label">Chat</div>
+            </a>
+            <a href="profile.html" class="nav-item" data-page="profile">
+                <img src="../assets/icons/profile.svg" class="nav-icon" alt="Profile">
+                <div class="nav-label">Profile</div>
+            </a>
+        </nav>
+    </div>
+
+    <script src="../js/app.js"></script>
+    <script>
+        initPage('chat');
+
+        const chatInput = document.getElementById('chatInput');
+        const messagesContainer = document.getElementById('messages');
+
+        chatInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') sendMessage();
+        });
+
+        function sendMessage() {
+            const message = chatInput.value.trim();
+            if (!message) return;
+
+            // Add user message
+            const userMsg = document.createElement('div');
+            userMsg.className = 'message user';
+            userMsg.innerHTML = `
+                <div class="msg-avatar">👤</div>
+                <div class="msg-bubble">${message}</div>
+            `;
+            messagesContainer.appendChild(userMsg);
+
+            // Add AI response
+            setTimeout(() => {
+                const aiMsg = document.createElement('div');
+                aiMsg.className = 'message';
+                aiMsg.innerHTML = `
+                    <div class="msg-avatar">🤖</div>
+                    <div class="msg-bubble">I understand your question. Let me help you with that!</div>
+                `;
+                messagesContainer.appendChild(aiMsg);
+                messagesContainer.scrollTop = messagesContainer.scrollHeight;
+            }, 800);
+
+            chatInput.value = '';
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+    </script>
+</body>
+</html>

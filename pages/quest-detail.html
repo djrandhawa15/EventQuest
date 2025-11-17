@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quest Details - EventQuest</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="app-container">
+        <div class="header">
+            <a href="search.html" style="color: white; text-decoration: none; font-size: 1.5rem;">←</a>
+            <div class="header-title">Quest Details</div>
+            <div></div>
+        </div>
+        
+        <div class="quest-hero">🏔️</div>
+        
+        <div class="quest-tabs">
+            <div class="quest-tab active" onclick="switchTab('about')">About</div>
+            <div class="quest-tab" onclick="switchTab('plan')">Plan</div>
+            <div class="quest-tab" onclick="switchTab('map')">Map</div>
+        </div>
+        
+        <div class="quest-content">
+            <div id="aboutTab" class="tab-content">
+                <h2>Wedding - Park Place</h2>
+                <p style="line-height: 1.8; color: var(--text-light); margin-bottom: 1.5rem;">
+                    Join us for an amazing scavenger hunt at the park! Complete challenges, 
+                    collect points, and compete with other teams. This event features photo 
+                    challenges, GPS checkpoints, and puzzle solving.
+                </p>
+                
+                <div class="card">
+                    <div class="stat-row">
+                        <span class="text-muted">Date</span>
+                        <strong>Jan 1, 2050</strong>
+                    </div>
+                    <div class="stat-row">
+                        <span class="text-muted">Time</span>
+                        <strong>7:00 PM</strong>
+                    </div>
+                    <div class="stat-row">
+                        <span class="text-muted">Location</span>
+                        <strong>Park Place</strong>
+                    </div>
+                    <div class="stat-row">
+                        <span class="text-muted">Participants</span>
+                        <strong>50 / 100</strong>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="planTab" class="tab-content" style="display: none;">
+                <h3>Quest Outline</h3>
+                <p style="line-height: 1.8; color: #1a1a1a;">
+                    <strong>Phase 1:</strong> Photo of the event location<br>
+                    <strong>Phase 2:</strong> Complete 5 GPS checkpoints<br>
+                    <strong>Phase 3:</strong> Solve the final puzzle<br><br>
+                    <strong>Reward:</strong> 500 XP + Special Badge
+                </p>
+            </div>
+            
+            <div id="mapTab" class="tab-content" style="display: none;">
+                <div style="height: 300px; background: linear-gradient(135deg, #89f7fe 0%, #66a6ff 100%); border-radius: 0.75rem; display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+                    🗺️
+                </div>
+                <p class="mt-2 text-muted">Interactive map showing all quest checkpoints and objectives.</p>
+            </div>
+            
+            <a href="quests.html" class="btn btn-primary" style="width: 100%; margin-top: 1.5rem;">Join Quest</a>
+        </div>
+        
+        <nav class="nav">
+            <a href="home.html" class="nav-item" data-page="home">
+                <img src="../assets/icons/home.svg" class="nav-icon" alt="Home">
+                <div class="nav-label">Home</div>
+            </a>
+            <a href="search.html" class="nav-item" data-page="search">
+                <img src="../assets/icons/search.svg" class="nav-icon" alt="Search">
+                <div class="nav-label">Search</div>
+            </a>
+            <a href="quests.html" class="nav-item" data-page="quests">
+                <img src="../assets/icons/question.svg" class="nav-icon" alt="Quests">
+                <div class="nav-label">Quests</div>
+            </a>
+            <a href="chat.html" class="nav-item" data-page="chat">
+                <img src="../assets/icons/chat.svg" class="nav-icon" alt="Chat">
+                <div class="nav-label">Chat</div>
+            </a>
+            <a href="profile.html" class="nav-item" data-page="profile">
+                <img src="../assets/icons/profile.svg" class="nav-icon" alt="Profile">
+                <div class="nav-label">Profile</div>
+            </a>
+        </nav>
+    </div>
+
+    <script src="../js/app.js"></script>
+    <script>
+        function switchTab(tabName) {
+            const tabs = document.querySelectorAll('.quest-tab');
+            const contents = document.querySelectorAll('.tab-content');
+            
+            tabs.forEach(tab => tab.classList.remove('active'));
+            contents.forEach(content => content.style.display = 'none');
+            
+            event.target.classList.add('active');
+            document.getElementById(tabName + 'Tab').style.display = 'block';
+        }
+    </script>
+</body>
+</html>

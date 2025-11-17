@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - EventQuest</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="app-container">
+        <div class="header">
+            <img src="../assets/logos/normal_no_slogan.svg" alt="EventQuest" style="height: 60px; filter: drop-shadow(0 0 3px #000) drop-shadow(0 0 3px #000) drop-shadow(0 0 3px #000);">
+            <div class="header-icons">
+                <span class="icon">📶</span>
+                <span class="icon">🔔</span>
+            </div>
+        </div>
+        
+        <div class="map-container">
+            <div class="map-view">
+                <div class="road road-h"></div>
+                <div class="road road-v"></div>
+                
+                <div class="building" style="top: 20%; left: 15%; width: 60px; height: 50px;"></div>
+                <div class="building" style="top: 25%; left: 60%; width: 70px; height: 60px;"></div>
+                <div class="building" style="top: 60%; left: 25%; width: 55px; height: 55px;"></div>
+                <div class="building" style="top: 65%; left: 65%; width: 65px; height: 45px;"></div>
+                
+                <div class="map-label" style="top: 15%; left: 15%;">Park Place</div>
+                <div class="map-label" style="top: 55%; left: 60%;">McDonald's</div>
+                <div class="map-label" style="top: 35%; left: 70%;">Central Park</div>
+            </div>
+            
+            <div class="user-location" style="top: 45%; left: 35%;"></div>
+            
+            <div class="map-controls">
+                <div class="map-btn" onclick="alert('Zoom in')">+</div>
+                <div class="map-btn" onclick="alert('Zoom out')">−</div>
+                <div class="map-btn" onclick="alert('Center location')">📍</div>
+            </div>
+            
+            <div class="marker active" style="top: 30%; left: 20%;" onclick="showPopup('Wedding - Park Place', 'Jan 1, 2050', '7:00 PM', 50)"></div>
+            <div class="marker active" style="top: 50%; left: 60%;" onclick="showPopup('Team Play Challenge', 'Jan 15, 2050', '2:00 PM', 100)"></div>
+            <div class="marker pending" style="top: 70%; left: 40%;" onclick="showPopup('Dinner at McDonald\'s', 'Jan 1, 2050', '7:30 PM', 30)"></div>
+            
+            <div class="quest-popup" id="questPopup">
+                <div class="quest-img">🏔️</div>
+                <div class="quest-title" id="popupTitle">Wedding - Park Place</div>
+                <div class="quest-meta">
+                    <span id="popupDate">📅 Jan 1, 2050</span>
+                    <span id="popupTime">⏰ 7:00 PM</span>
+                    <span id="popupPlayers">👥 50 players</span>
+                </div>
+                <a href="quest-detail.html" class="btn btn-primary" style="width: 100%; margin-bottom: 0.625rem;">View Details</a>
+                <button class="btn btn-secondary" style="width: 100%;" onclick="closePopup()">Close</button>
+            </div>
+        </div>
+        
+        <nav class="nav">
+            <a href="home.html" class="nav-item active" data-page="home">
+                <img src="../assets/icons/home.svg" class="nav-icon" alt="Home">
+                <div class="nav-label">Home</div>
+            </a>
+            <a href="search.html" class="nav-item" data-page="search">
+                <img src="../assets/icons/search.svg" class="nav-icon" alt="Search">
+                <div class="nav-label">Search</div>
+            </a>
+            <a href="quests.html" class="nav-item" data-page="quests">
+                <img src="../assets/icons/question.svg" class="nav-icon" alt="Quests">
+                <div class="nav-label">Quests</div>
+            </a>
+            <a href="chat.html" class="nav-item" data-page="chat">
+                <img src="../assets/icons/chat.svg" class="nav-icon" alt="Chat">
+                <div class="nav-label">Chat</div>
+            </a>
+            <a href="profile.html" class="nav-item" data-page="profile">
+                <img src="../assets/icons/profile.svg" class="nav-icon" alt="Profile">
+                <div class="nav-label">Profile</div>
+            </a>
+        </nav>
+    </div>
+
+    <script src="../js/app.js"></script>
+    <script>
+        initPage('home');
+
+        function showPopup(title, date, time, players) {
+            document.getElementById('popupTitle').textContent = title;
+            document.getElementById('popupDate').textContent = `📅 ${date}`;
+            document.getElementById('popupTime').textContent = `⏰ ${time}`;
+            document.getElementById('popupPlayers').textContent = `👥 ${players} players`;
+            document.getElementById('questPopup').classList.add('active');
+        }
+
+        function closePopup() {
+            document.getElementById('questPopup').classList.remove('active');
+        }
+    </script>
+</body>
+</html>
