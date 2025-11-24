@@ -347,13 +347,13 @@ h3 { font-size: 1.125rem; }
     bottom: 6.5rem;
     left: 1rem;
     right: 1rem;
-    background: var(--bg);
+    background: white;
     border-radius: 1rem;
     padding: 1.25rem;
     box-shadow: 0 10px 25px rgba(0,0,0,0.5);
     display: none;
     z-index: 50;
-    border: 1px solid var(--border);
+    border: 1px solid #e0e0e0;
 }
 
 .quest-popup.active {
@@ -382,14 +382,14 @@ h3 { font-size: 1.125rem; }
     font-size: 1.25rem;
     font-weight: 600;
     margin-bottom: 0.625rem;
-    color: var(--white);
+    color: #1a1a1a;
 }
 
 .quest-meta {
     display: flex;
     gap: 1rem;
     margin-bottom: 1rem;
-    color: var(--text-light);
+    color: #666;
     font-size: 0.875rem;
 }
 
