@@ -244,9 +244,9 @@ h3 { font-size: 1.125rem; }
 .map-label {
     position: absolute;
     font-size: 0.75rem;
-    color: var(--white);
+    color: #1a1a1a;
     font-weight: 600;
-    text-shadow: 0 0 3px rgba(9, 29, 58, 0.8), 0 0 6px rgba(9, 29, 58, 0.6);
+    text-shadow: 0 0 3px rgba(255, 255, 255, 0.8), 0 0 6px rgba(255, 255, 255, 0.6);
     pointer-events: none;
 }
 
