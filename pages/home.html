@@ -45,7 +45,39 @@
             <div class="marker pending" style="top: 70%; left: 40%;" onclick="showPopup('Dinner at McDonald\'s', 'Jan 1, 2050', '7:30 PM', 30)"></div>
             
             <div class="quest-popup" id="questPopup">
-                <div class="quest-img">🏔️</div>
+                <div class="quest-img" style="position: relative; overflow: hidden;">
+                    <svg viewBox="0 0 400 140" style="width: 100%; height: 100%; position: absolute; top: 0; left: 0;">
+                        <!-- Sky -->
+                        <rect width="400" height="140" fill="url(#popupSkyGradient)"/>
+
+                        <!-- Sun -->
+                        <circle cx="340" cy="30" r="20" fill="#ffd700" opacity="0.9"/>
+
+                        <!-- Back mountain -->
+                        <path d="M 0 140 L 80 60 L 160 90 L 240 50 L 320 80 L 400 70 L 400 140 Z" fill="#3d5a22" opacity="0.7"/>
+
+                        <!-- Middle mountain -->
+                        <path d="M 0 140 L 60 80 L 140 110 L 220 60 L 300 90 L 400 100 L 400 140 Z" fill="#4a6b2a"/>
+
+                        <!-- Front mountain with snow cap -->
+                        <path d="M 0 140 L 90 100 L 160 30 L 230 100 L 320 140 L 400 140 Z" fill="#5a7c35"/>
+                        <path d="M 135 65 L 160 30 L 185 65 L 177 73 L 160 55 L 143 73 Z" fill="#ffffff" opacity="0.9"/>
+
+                        <!-- Trees on mountains -->
+                        <polygon points="110,120 115,105 120,120" fill="#2d4a1a"/>
+                        <polygon points="130,125 135,110 140,125" fill="#2d4a1a"/>
+                        <polygon points="150,122 155,107 160,122" fill="#2d4a1a"/>
+                        <polygon points="200,115 205,100 210,115" fill="#2d4a1a"/>
+                        <polygon points="220,120 225,105 230,120" fill="#2d4a1a"/>
+
+                        <defs>
+                            <linearGradient id="popupSkyGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" style="stop-color:#87CEEB;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#B0D4E3;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </div>
                 <div class="quest-title" id="popupTitle">Wedding - Park Place</div>
                 <div class="quest-meta">
                     <span id="popupDate">📅 Jan 1, 2050</span>
