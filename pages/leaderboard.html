@@ -10,11 +10,19 @@
     <div class="app-container">
         <div class="header">
             <a href="profile.html" style="color: white; text-decoration: none; font-size: 1.5rem;">←</a>
-            <div class="header-title">Top Players</div>
+            <div class="header-title">Leaderboard</div>
             <div></div>
         </div>
-        
-        <div class="leaderboard-wrapper">
+
+        <!-- Tabs for Global and Per-Quest Leaderboards -->
+        <div class="tabs" style="padding: 1rem 1.25rem; background: var(--bg); border-bottom: 1px solid var(--border);">
+            <div class="tab active" onclick="switchLeaderboard('global')">🌍 Global</div>
+            <div class="tab" onclick="switchLeaderboard('wedding')">💒 Wedding Quest</div>
+            <div class="tab" onclick="switchLeaderboard('teamplay')">🎮 Team Play</div>
+            <div class="tab" onclick="switchLeaderboard('dinner')">🍔 Dinner Quest</div>
+        </div>
+
+        <div class="leaderboard-wrapper" id="globalLeaderboard">
             <div class="leader-item">
                 <div class="rank gold">1</div>
                 <div class="player-info">
@@ -94,6 +102,61 @@
     <script src="../js/app.js"></script>
     <script>
         initPage('profile');
+
+        const leaderboards = {
+            global: [
+                { rank: 1, name: 'Mark', xp: 100, medal: '🥇', class: 'gold' },
+                { rank: 2, name: 'Amy', xp: 90, medal: '🥈', class: 'silver' },
+                { rank: 3, name: 'Joe', xp: 80, medal: '🥉', class: 'bronze' },
+                { rank: 4, name: 'Sarah', xp: 75 },
+                { rank: 5, name: 'Mike', xp: 70 },
+                { rank: 13, name: 'You', xp: 50, currentUser: true }
+            ],
+            wedding: [
+                { rank: 1, name: 'Sarah', xp: 95, medal: '🥇', class: 'gold' },
+                { rank: 2, name: 'Mark', xp: 88, medal: '🥈', class: 'silver' },
+                { rank: 3, name: 'Lisa', xp: 82, medal: '🥉', class: 'bronze' },
+                { rank: 4, name: 'Tom', xp: 75 },
+                { rank: 7, name: 'You', xp: 60, currentUser: true }
+            ],
+            teamplay: [
+                { rank: 1, name: 'Joe', xp: 100, medal: '🥇', class: 'gold' },
+                { rank: 2, name: 'Amy', xp: 92, medal: '🥈', class: 'silver' },
+                { rank: 3, name: 'Mike', xp: 85, medal: '🥉', class: 'bronze' },
+                { rank: 4, name: 'Sarah', xp: 78 },
+                { rank: 9, name: 'You', xp: 55, currentUser: true }
+            ],
+            dinner: [
+                { rank: 1, name: 'Amy', xp: 98, medal: '🥇', class: 'gold' },
+                { rank: 2, name: 'Joe', xp: 90, medal: '🥈', class: 'silver' },
+                { rank: 3, name: 'Mark', xp: 85, medal: '🥉', class: 'bronze' },
+                { rank: 5, name: 'You', xp: 70, currentUser: true }
+            ]
+        };
+
+        function switchLeaderboard(type) {
+            // Update tab active state
+            document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+            event.target.classList.add('active');
+
+            // Render leaderboard
+            const wrapper = document.querySelector('.leaderboard-wrapper');
+            wrapper.innerHTML = '';
+
+            leaderboards[type].forEach(player => {
+                const item = document.createElement('div');
+                item.className = 'leader-item' + (player.currentUser ? ' current-user' : '');
+                item.innerHTML = `
+                    <div class="rank ${player.class || ''}">${player.rank}</div>
+                    <div class="player-info">
+                        <div class="player-name">${player.name}</div>
+                        <div class="player-xp">${player.xp} XP</div>
+                    </div>
+                    ${player.medal ? `<div>${player.medal}</div>` : ''}
+                `;
+                wrapper.appendChild(item);
+            });
+        }
     </script>
 </body>
 </html>

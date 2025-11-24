@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Quest - EventQuest</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="app-container">
+        <div class="header">
+            <a href="home.html" style="color: white; text-decoration: none; font-size: 1.5rem;">←</a>
+            <div class="header-title">Create New Quest</div>
+            <div></div>
+        </div>
+
+        <div class="content" style="padding: 1.25rem 1.25rem 6.25rem; overflow-y: auto; background: #f5f5f5;">
+            <form id="createQuestForm">
+                <div class="card" style="background: white; margin-bottom: 1.5rem;">
+                    <h3 style="color: #1a1a1a; margin-bottom: 1rem;">Basic Information</h3>
+
+                    <div class="form-group">
+                        <label class="form-label" style="color: #1a1a1a;">Quest Title</label>
+                        <input type="text" id="questTitle" class="form-input" style="background: white; color: #1a1a1a;" placeholder="Enter quest title" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" style="color: #1a1a1a;">Description</label>
+                        <textarea id="questDescription" class="form-input" style="background: white; color: #1a1a1a; min-height: 100px; resize: vertical;" placeholder="Describe your quest..." required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" style="color: #1a1a1a;">Quest Icon</label>
+                        <div style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 0.5rem;">
+                            <button type="button" class="icon-option" data-icon="🏔️" onclick="selectIcon(this)">🏔️</button>
+                            <button type="button" class="icon-option" data-icon="🌉" onclick="selectIcon(this)">🌉</button>
+                            <button type="button" class="icon-option" data-icon="🏰" onclick="selectIcon(this)">🏰</button>
+                            <button type="button" class="icon-option" data-icon="🏛️" onclick="selectIcon(this)">🏛️</button>
+                            <button type="button" class="icon-option" data-icon="🎪" onclick="selectIcon(this)">🎪</button>
+                            <button type="button" class="icon-option" data-icon="🎭" onclick="selectIcon(this)">🎭</button>
+                            <button type="button" class="icon-option" data-icon="🎨" onclick="selectIcon(this)">🎨</button>
+                            <button type="button" class="icon-option" data-icon="🎮" onclick="selectIcon(this)">🎮</button>
+                            <button type="button" class="icon-option" data-icon="🍕" onclick="selectIcon(this)">🍕</button>
+                            <button type="button" class="icon-option" data-icon="🍔" onclick="selectIcon(this)">🍔</button>
+                            <button type="button" class="icon-option" data-icon="🎂" onclick="selectIcon(this)">🎂</button>
+                            <button type="button" class="icon-option" data-icon="💒" onclick="selectIcon(this)">💒</button>
+                        </div>
+                        <input type="hidden" id="questIcon" required>
+                    </div>
+                </div>
+
+                <div class="card" style="background: white; margin-bottom: 1.5rem;">
+                    <h3 style="color: #1a1a1a; margin-bottom: 1rem;">Location & Time</h3>
+
+                    <div class="form-group">
+                        <label class="form-label" style="color: #1a1a1a;">Location Name</label>
+                        <input type="text" id="questLocation" class="form-input" style="background: white; color: #1a1a1a;" placeholder="e.g., Central Park" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" style="color: #1a1a1a;">Map Position</label>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">
+                            <input type="number" id="questLatitude" class="form-input" style="background: white; color: #1a1a1a;" placeholder="Latitude %" min="0" max="100" required>
+                            <input type="number" id="questLongitude" class="form-input" style="background: white; color: #1a1a1a;" placeholder="Longitude %" min="0" max="100" required>
+                        </div>
+                        <small style="color: #666; font-size: 0.75rem;">Position on map (0-100% for top/left)</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" style="color: #1a1a1a;">Date</label>
+                        <input type="date" id="questDate" class="form-input" style="background: white; color: #1a1a1a;" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" style="color: #1a1a1a;">Time</label>
+                        <input type="time" id="questTime" class="form-input" style="background: white; color: #1a1a1a;" required>
+                    </div>
+                </div>
+
+                <div class="card" style="background: white; margin-bottom: 1.5rem;">
+                    <h3 style="color: #1a1a1a; margin-bottom: 1rem;">Quest Details</h3>
+
+                    <div class="form-group">
+                        <label class="form-label" style="color: #1a1a1a;">Max Participants</label>
+                        <input type="number" id="questMaxParticipants" class="form-input" style="background: white; color: #1a1a1a;" placeholder="100" min="1" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" style="color: #1a1a1a;">XP Reward</label>
+                        <input type="number" id="questXP" class="form-input" style="background: white; color: #1a1a1a;" placeholder="50" min="10" step="10" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" style="color: #1a1a1a;">Difficulty</label>
+                        <select id="questDifficulty" class="form-input" style="background: white; color: #1a1a1a;" required>
+                            <option value="">Select difficulty</option>
+                            <option value="easy">Easy</option>
+                            <option value="medium">Medium</option>
+                            <option value="hard">Hard</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary" style="width: 100%; margin-bottom: 1rem;">Create Quest</button>
+                <a href="home.html" class="btn btn-secondary" style="width: 100%;">Cancel</a>
+            </form>
+        </div>
+
+        <nav class="nav">
+            <a href="home.html" class="nav-item active" data-page="home">
+                <img src="../assets/icons/home.svg" class="nav-icon" alt="Home">
+                <div class="nav-label">Home</div>
+            </a>
+            <a href="search.html" class="nav-item" data-page="search">
+                <img src="../assets/icons/search.svg" class="nav-icon" alt="Search">
+                <div class="nav-label">Search</div>
+            </a>
+            <a href="quests.html" class="nav-item" data-page="quests">
+                <img src="../assets/icons/question.svg" class="nav-icon" alt="Quests">
+                <div class="nav-label">Quests</div>
+            </a>
+            <a href="chat.html" class="nav-item" data-page="chat">
+                <img src="../assets/icons/chat.svg" class="nav-icon" alt="Chat">
+                <div class="nav-label">Chat</div>
+            </a>
+            <a href="profile.html" class="nav-item" data-page="profile">
+                <img src="../assets/icons/profile.svg" class="nav-icon" alt="Profile">
+                <div class="nav-label">Profile</div>
+            </a>
+        </nav>
+    </div>
+
+    <script src="../js/app.js"></script>
+    <script>
+        initPage('home');
+
+        let selectedIcon = '';
+
+        function selectIcon(button) {
+            // Remove selection from all icons
+            document.querySelectorAll('.icon-option').forEach(btn => {
+                btn.style.background = 'white';
+                btn.style.border = '2px solid #e0e0e0';
+            });
+
+            // Select current icon
+            button.style.background = 'var(--primary)';
+            button.style.border = '2px solid var(--primary)';
+            selectedIcon = button.dataset.icon;
+            document.getElementById('questIcon').value = selectedIcon;
+        }
+
+        document.getElementById('createQuestForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            if (!selectedIcon) {
+                alert('Please select an icon for your quest');
+                return;
+            }
+
+            const quest = {
+                id: Date.now(),
+                title: document.getElementById('questTitle').value,
+                description: document.getElementById('questDescription').value,
+                icon: selectedIcon,
+                location: document.getElementById('questLocation').value,
+                latitude: document.getElementById('questLatitude').value,
+                longitude: document.getElementById('questLongitude').value,
+                date: document.getElementById('questDate').value,
+                time: document.getElementById('questTime').value,
+                maxParticipants: document.getElementById('questMaxParticipants').value,
+                currentParticipants: 0,
+                xp: document.getElementById('questXP').value,
+                difficulty: document.getElementById('questDifficulty').value,
+                status: 'pending',
+                createdBy: session.getUser()?.name || 'Anonymous',
+                createdAt: new Date().toISOString()
+            };
+
+            // Get existing quests or create new array
+            let quests = storage.get('customQuests') || [];
+            quests.push(quest);
+            storage.set('customQuests', quests);
+
+            alert('Quest created successfully!');
+            window.location.href = 'home.html';
+        });
+    </script>
+
+    <style>
+        .icon-option {
+            width: 100%;
+            aspect-ratio: 1;
+            font-size: 2rem;
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            padding: 0.5rem;
+        }
+
+        .icon-option:hover {
+            border-color: var(--primary);
+            transform: scale(1.05);
+        }
+    </style>
+</body>
+</html>

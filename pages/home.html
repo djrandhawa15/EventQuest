@@ -32,11 +32,12 @@
             </div>
             
             <div class="user-location" style="top: 45%; left: 35%;"></div>
-            
+
             <div class="map-controls">
                 <div class="map-btn" onclick="alert('Zoom in')">+</div>
                 <div class="map-btn" onclick="alert('Zoom out')">−</div>
                 <div class="map-btn" onclick="alert('Center location')">📍</div>
+                <a href="create-quest.html" class="map-btn" style="background: var(--primary); color: white; text-decoration: none; font-size: 1.5rem; font-weight: bold; line-height: 1;" title="Create Quest">+</a>
             </div>
             
             <div class="marker active" style="top: 30%; left: 20%;" onclick="showPopup('Wedding - Park Place', 'Jan 1, 2050', '7:00 PM', 50)"></div>
@@ -95,6 +96,49 @@
         function closePopup() {
             document.getElementById('questPopup').classList.remove('active');
         }
+
+        // Load and display custom quests on the map
+        function loadCustomQuests() {
+            const customQuests = storage.get('customQuests') || [];
+            const mapView = document.querySelector('.map-view');
+
+            customQuests.forEach((quest) => {
+                // Create marker for custom quest
+                const marker = document.createElement('div');
+                marker.className = `marker ${quest.status}`;
+                marker.style.top = `${quest.latitude}%`;
+                marker.style.left = `${quest.longitude}%`;
+                marker.onclick = () => showPopup(
+                    quest.title,
+                    quest.date,
+                    quest.time,
+                    `${quest.currentParticipants}/${quest.maxParticipants}`
+                );
+
+                // Update marker icon
+                const markerAfter = document.createElement('style');
+                markerAfter.innerHTML = `
+                    .marker[data-quest-id="${quest.id}"]::after {
+                        content: '${quest.icon}';
+                    }
+                `;
+                document.head.appendChild(markerAfter);
+                marker.setAttribute('data-quest-id', quest.id);
+
+                mapView.appendChild(marker);
+
+                // Add location label
+                const label = document.createElement('div');
+                label.className = 'map-label';
+                label.style.top = `${parseInt(quest.latitude) - 5}%`;
+                label.style.left = `${quest.longitude}%`;
+                label.textContent = quest.location;
+                mapView.appendChild(label);
+            });
+        }
+
+        // Load custom quests when page loads
+        loadCustomQuests();
     </script>
 </body>
 </html>

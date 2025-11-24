@@ -89,12 +89,49 @@
     <script>
         initPage('search');
 
+        let allEventCards = [];
+
+        // Load custom quests and add them to the event list
+        function loadCustomQuests() {
+            const customQuests = storage.get('customQuests') || [];
+            const eventList = document.getElementById('eventList');
+
+            customQuests.forEach((quest) => {
+                const eventCard = document.createElement('div');
+                eventCard.className = 'event-card';
+                eventCard.dataset.status = quest.status;
+                eventCard.onclick = () => window.location.href = 'quest-detail.html';
+
+                const statusBadge = quest.status === 'active' ?
+                    '<span class="badge">Active</span>' :
+                    '<span class="badge pending">Pending</span>';
+
+                eventCard.innerHTML = `
+                    <h3>${quest.icon} ${quest.title}</h3>
+                    <div class="event-meta">
+                        <span>📅 ${quest.date}</span>
+                        <span>👥 ${quest.currentParticipants}/${quest.maxParticipants} players</span>
+                        <span>⭐ ${quest.xp} XP</span>
+                    </div>
+                    ${statusBadge}
+                    <p style="color: #666; font-size: 0.875rem; margin-top: 0.5rem;">Created by ${quest.createdBy}</p>
+                `;
+
+                eventList.appendChild(eventCard);
+            });
+
+            // Update the event cards list
+            allEventCards = document.querySelectorAll('.event-card');
+        }
+
+        // Load custom quests when page loads
+        loadCustomQuests();
+
         const searchInput = document.getElementById('searchInput');
-        const eventCards = document.querySelectorAll('.event-card');
 
         searchInput.addEventListener('input', (e) => {
             const query = e.target.value.toLowerCase();
-            eventCards.forEach(card => {
+            allEventCards.forEach(card => {
                 const title = card.querySelector('h3').textContent.toLowerCase();
                 card.style.display = title.includes(query) ? 'block' : 'none';
             });
@@ -105,7 +142,7 @@
             tabs.forEach(tab => tab.classList.remove('active'));
             event.target.classList.add('active');
 
-            eventCards.forEach(card => {
+            allEventCards.forEach(card => {
                 if (status === 'all') {
                     card.style.display = 'block';
                 } else {

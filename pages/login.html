@@ -8,24 +8,62 @@
 </head>
 <body>
     <div class="app-container">
-        <div class="content" style="display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2.5rem 1.875rem 6.25rem;">
+        <div class="content" style="display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2.5rem 1.875rem 6.25rem; overflow-y: auto;">
             <img src="../assets/logos/normal_no_slogan.svg" alt="EventQuest" style="width: 220px; margin-bottom: 2.5rem;">
-            
+
+            <!-- Toggle buttons for Sign In / Sign Up -->
+            <div style="width: 100%; max-width: 360px; display: flex; gap: 0.5rem; margin-bottom: 1.5rem;">
+                <button id="signInBtn" class="btn btn-primary" style="flex: 1;" onclick="showSignIn()">Sign In</button>
+                <button id="signUpBtn" class="btn btn-secondary" style="flex: 1;" onclick="showSignUp()">Sign Up</button>
+            </div>
+
+            <!-- Sign In Form -->
             <form id="loginForm" style="width: 100%; max-width: 360px;">
                 <div class="form-group">
-                    <label class="form-label">Email</label>
+                    <label class="form-label" style="color: var(--white);">Email</label>
                     <input type="email" id="email" class="form-input" placeholder="Enter your email" required>
                 </div>
-                
+
                 <div class="form-group">
-                    <label class="form-label">Password</label>
+                    <label class="form-label" style="color: var(--white);">Password</label>
                     <input type="password" id="password" class="form-input" placeholder="Enter your password" required>
                 </div>
-                
+
                 <button type="submit" class="btn btn-primary" style="width: 100%; margin-bottom: 1rem;">Log In</button>
                 <a href="home.html" class="btn btn-secondary" style="width: 100%; margin-bottom: 1.25rem;">Skip for Now</a>
-                
-                <button type="button" class="btn" style="width: 100%; display: flex; align-items: center; justify-content: center; gap: 0.625rem; background: white; border: 1px solid var(--border);" onclick="handleGoogleLogin()">
+
+                <button type="button" class="btn" style="width: 100%; display: flex; align-items: center; justify-content: center; gap: 0.625rem; background: white; border: 1px solid var(--border); color: #1a1a1a;" onclick="handleGoogleLogin()">
+                    <span>🔍</span>
+                    <span>Continue with Google</span>
+                </button>
+            </form>
+
+            <!-- Sign Up Form -->
+            <form id="signUpForm" style="width: 100%; max-width: 360px; display: none;">
+                <div class="form-group">
+                    <label class="form-label" style="color: var(--white);">Full Name</label>
+                    <input type="text" id="signupName" class="form-input" placeholder="Enter your full name" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" style="color: var(--white);">Email</label>
+                    <input type="email" id="signupEmail" class="form-input" placeholder="Enter your email" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" style="color: var(--white);">Password</label>
+                    <input type="password" id="signupPassword" class="form-input" placeholder="Create a password" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" style="color: var(--white);">Confirm Password</label>
+                    <input type="password" id="signupConfirmPassword" class="form-input" placeholder="Confirm your password" required>
+                </div>
+
+                <button type="submit" class="btn btn-primary" style="width: 100%; margin-bottom: 1rem;">Create Account</button>
+                <a href="home.html" class="btn btn-secondary" style="width: 100%; margin-bottom: 1.25rem;">Skip for Now</a>
+
+                <button type="button" class="btn" style="width: 100%; display: flex; align-items: center; justify-content: center; gap: 0.625rem; background: white; border: 1px solid var(--border); color: #1a1a1a;" onclick="handleGoogleLogin()">
                     <span>🔍</span>
                     <span>Continue with Google</span>
                 </button>
@@ -40,17 +78,59 @@
             window.location.href = 'home.html';
         }
 
+        // Toggle between sign in and sign up
+        function showSignIn() {
+            document.getElementById('loginForm').style.display = 'block';
+            document.getElementById('signUpForm').style.display = 'none';
+            document.getElementById('signInBtn').classList.remove('btn-secondary');
+            document.getElementById('signInBtn').classList.add('btn-primary');
+            document.getElementById('signUpBtn').classList.remove('btn-primary');
+            document.getElementById('signUpBtn').classList.add('btn-secondary');
+        }
+
+        function showSignUp() {
+            document.getElementById('loginForm').style.display = 'none';
+            document.getElementById('signUpForm').style.display = 'block';
+            document.getElementById('signUpBtn').classList.remove('btn-secondary');
+            document.getElementById('signUpBtn').classList.add('btn-primary');
+            document.getElementById('signInBtn').classList.remove('btn-primary');
+            document.getElementById('signInBtn').classList.add('btn-secondary');
+        }
+
+        // Sign In form handler
         document.getElementById('loginForm').addEventListener('submit', (e) => {
             e.preventDefault();
             const email = document.getElementById('email').value;
             const name = email.split('@')[0];
-            
+
             session.setUser({
                 email: email,
                 name: name,
                 joinDate: new Date().toISOString()
             });
-            
+
+            window.location.href = 'home.html';
+        });
+
+        // Sign Up form handler
+        document.getElementById('signUpForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('signupName').value;
+            const email = document.getElementById('signupEmail').value;
+            const password = document.getElementById('signupPassword').value;
+            const confirmPassword = document.getElementById('signupConfirmPassword').value;
+
+            if (password !== confirmPassword) {
+                alert('Passwords do not match!');
+                return;
+            }
+
+            session.setUser({
+                email: email,
+                name: name,
+                joinDate: new Date().toISOString()
+            });
+
             window.location.href = 'home.html';
         });
 
